@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "lib/",
+    "allowJs": true,
+    "checkJs": false,
+    "module": "commonjs",
+    "target": "es2016",
+    "moduleResolution": "node",
+    "lib": ["es2016", "dom"],
+    "rootDir": "src/",
+  }
+}
