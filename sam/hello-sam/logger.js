@@ -3,6 +3,6 @@ exports.handler = async (event) => {
   console.log(eventJson);
   return {
     body: eventJson,
-    status: 200,
+    statusCode: 200,
   };
 };

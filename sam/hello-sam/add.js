@@ -6,6 +6,6 @@ exports.handler = async (event) => {
       num2,
       result: num1 + num2,
     }),
-    status: 200,
+    statusCode: 200,
   };
 };
