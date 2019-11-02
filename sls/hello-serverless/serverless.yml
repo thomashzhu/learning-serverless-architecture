@@ -1,0 +1,19 @@
+service: hello-serverless
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: us-west-2
+
+functions:
+  add:
+    events:
+      - http:
+          cors: true
+          method: post
+          path: math/add
+    handler: add.handler
+
+  hello:
+    handler: hello.handler
