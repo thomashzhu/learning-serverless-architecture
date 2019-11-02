@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: REST API using SAM
+Globals:
+  Function:
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: Table
+    MemorySize: 128
+    Runtime: nodejs10.x
+    Timeout: 5
+Resources:
+  Table:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: userId
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+  GetUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        GetUser:
+          Properties:
+            Method: get
+            Path: /user/{userId}
+          Type: Api
+      Handler: get.handler
+      Policies: AmazonDynamoDBReadOnlyAccess
+      CodeUri: s3://thomas-learning-sam/b854fc776fcd41eaa1e51ecdf4291118
+  PostUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        GetUser:
+          Properties:
+            Method: post
+            Path: /user/{userId}
+          Type: Api
+      Handler: post.handler
+      Policies: AmazonDynamoDBFullAccess
+      CodeUri: s3://thomas-learning-sam/b854fc776fcd41eaa1e51ecdf4291118
+  DeleteUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        GetUser:
+          Properties:
+            Method: delete
+            Path: /user/{userId}
+          Type: Api
+      Handler: delete.handler
+      Policies: AmazonDynamoDBFullAccess
+      CodeUri: s3://thomas-learning-sam/b854fc776fcd41eaa1e51ecdf4291118
