@@ -3,17 +3,16 @@
 module.exports.handler = async event => {
   const { num1, num2 } = JSON.parse(event.body);
 
+  const output = {
+    num1,
+    num2,
+    result: num1 + num2,
+  };
+  console.log(output)
+
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        num1,
-        num2,
-        result: num1 + num2,
-      },
-      null,
-      2
-    ),
+    body: JSON.stringify(output, null, 2),
   };
 
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
