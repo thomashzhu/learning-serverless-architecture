@@ -1,10 +1,12 @@
 service: hello-serverless
 
 provider:
+  memorySize: 256
   name: aws
+  region: us-west-2
   runtime: nodejs10.x
   stage: dev
-  region: us-west-2
+  timeout: 10
 
 functions:
   add:
@@ -17,3 +19,13 @@ functions:
 
   hello:
     handler: hello.handler
+    memorySize: 128
+    timeout: 3
+    vpc:
+      securityGroupIds:
+        - sg-13e25058
+      subnetIds:
+        - subnet-1692ae6f
+        - subnet-f491c8bf
+        - subnet-081c1252
+        - subnet-e95ed8c2
